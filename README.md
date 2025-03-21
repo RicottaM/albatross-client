@@ -1,2 +1,2 @@
 # navigo-client
-A React web application inspired by Google Maps that allows users to browse an interactive map and display locations of specific types of places. It utilizes a map layer fetched from external sources such as OpenStreetMap or Google Maps. Uses navigo-api also available in my repositories.
+A React web application inspired by Google Maps that allows users to browse an interactive map and display locations of specific types of places. It utilizes a map layer fetched from Google Maps. Uses navigo-api also available in my repositories.
