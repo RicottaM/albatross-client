@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import Alert from '@/components/alert/Alert';
 import './Login.css';
+import { useLocation } from 'react-router-dom';
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { login, register, loading } = useAuth();
 
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -12,30 +14,46 @@ const Login = () => {
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerRepeatPassword, setRegisterRepeatPassword] = useState('');
 
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const location = useLocation();
+  const alertFromRedirect = location.state?.alert;
+
+  useEffect(() => {
+    if (alertFromRedirect) {
+      setAlertTitle(alertFromRedirect.title || 'Error');
+      setAlertMessage(alertFromRedirect.message || '');
+      setAlertVisible(true);
+    }
+  }, [alertFromRedirect]);
+
+  const showAlert = (title: string, message: string) => {
+    setAlertTitle(title);
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Tymczasowe przejście do /home bez walidacji
-    navigate('/home');
+    const { success, message } = await login(loginUsername, loginPassword);
+    if (!success && message) {
+      showAlert('Login failed', message);
+    }
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Możesz dodać sprawdzenie: if (registerPassword !== registerRepeatPassword) return;
-    try {
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: registerUsername, password: registerPassword }),
-      });
 
-      const data = await res.json();
-      if (!res.ok) {
-        alert(data.message || 'Registration failed');
-      } else {
-        alert('Registered successfully');
-      }
-    } catch (err) {
-      alert('Registration server error');
+    if (registerPassword !== registerRepeatPassword) {
+      showAlert('Registration failed', 'Passwords do not match');
+      return;
+    }
+
+    const { success, message } = await register(registerUsername, registerPassword);
+    if (!success && message) {
+      showAlert('Registration failed', message);
     }
   };
 
@@ -54,7 +72,7 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <input type="text" placeholder="Login" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-            <button type="submit" className="auth-button">
+            <button type="submit" className="auth-button" disabled={loading}>
               Login
             </button>
           </form>
@@ -65,19 +83,15 @@ const Login = () => {
           <form onSubmit={handleRegister}>
             <input type="text" placeholder="Login" value={registerUsername} onChange={(e) => setRegisterUsername(e.target.value)} />
             <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} />
-            <input
-              type="password"
-              placeholder="Repeat password"
-              value={registerRepeatPassword}
-              onChange={(e) => setRegisterRepeatPassword(e.target.value)}
-              required
-            />
-            <button type="submit" className="auth-button">
+            <input type="password" placeholder="Repeat password" value={registerRepeatPassword} onChange={(e) => setRegisterRepeatPassword(e.target.value)} />
+            <button type="submit" className="auth-button" disabled={loading}>
               Register
             </button>
           </form>
         </div>
       </div>
+
+      {alertVisible && <Alert title={alertTitle} message={alertMessage} onClose={() => setAlertVisible(false)} />}
     </div>
   );
 };

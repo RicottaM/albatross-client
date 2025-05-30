@@ -11,12 +11,12 @@
 .auth-logo {
   display: flex;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .auth-logo h2 {
   font-size: 2rem;
-  margin-left: 1rem;
 }
 
 .logo-icon-login {
@@ -98,4 +98,12 @@
 
 .auth-button:hover {
   background-color: #e6b800;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 0.8s steps(2, start) infinite;
+  color: var(--color-yellow);
+  margin-left: 4px;
 }

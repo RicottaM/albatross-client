@@ -1,7 +1,11 @@
 import './Navbar.css';
 import { FaUser } from 'react-icons/fa';
+import { useAuth } from '@/hooks/useAuth';
+import { NavbarProps } from './Navbar.types';
 
-const Navbar = () => {
+const Navbar = ({ username }: NavbarProps) => {
+  const { logout } = useAuth();
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
@@ -14,11 +18,18 @@ const Navbar = () => {
         <li>Documents</li>
         <li>Points</li>
         <li>Account</li>
+        {username && (
+          <li className="navbar-user-info">
+            <FaUser size={18} />
+            <span>{username}</span>
+            <button onClick={logout} className="logout-button">
+              Logout
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
 };
-
-//<FaUser size={24} style={{ marginTop: 5 }} />
 
 export default Navbar;
