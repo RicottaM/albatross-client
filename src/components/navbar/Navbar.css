@@ -39,8 +39,8 @@
 }
 
 .navbar > ul > li {
-  margin-right: 2rem;
   font-weight: 600;
+  margin-right: 2rem;
 }
 
 .navbar-menu {
@@ -78,24 +78,6 @@
 
 .logout-icon-wrapper svg {
   cursor: pointer;
-}
-
-.custom-tooltip {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  z-index: 10;
-  transition: opacity 0.2s ease;
-  transition-delay: 0s;
 }
 
 .logout-icon-wrapper:hover .custom-tooltip {
