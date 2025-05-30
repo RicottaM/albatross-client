@@ -64,7 +64,7 @@
   border: solid 1px var(--color-dark-gray);
   border-radius: 8px;
   font-size: 1rem;
-  background-color: var(--color-dark);
+  background-color: var(--color-black);
   color: var(--color-white);
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, placeholder 0.2s ease;
 }

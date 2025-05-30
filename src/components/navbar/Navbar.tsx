@@ -1,5 +1,5 @@
 import './Navbar.css';
-import { FaUser } from 'react-icons/fa';
+import { BsDoorOpenFill } from 'react-icons/bs';
 import { useAuth } from '@/hooks/useAuth';
 import { NavbarProps } from './Navbar.types';
 
@@ -15,17 +15,18 @@ const Navbar = ({ username }: NavbarProps) => {
         </h2>
       </div>
       <ul>
-        <li>Documents</li>
-        <li>Points</li>
-        <li>Account</li>
         {username && (
-          <li className="navbar-user-info">
-            <FaUser size={18} />
-            <span>{username}</span>
-            <button onClick={logout} className="logout-button">
-              Logout
-            </button>
-          </li>
+          <>
+            <li className="navbar-username">
+              <span title="Sign out">{username}</span>
+            </li>
+            <li className="navbar-user-info">
+              <div className="logout-icon-wrapper">
+                <BsDoorOpenFill size={32} onClick={logout} />
+                <span className="custom-tooltip">Sign out</span>
+              </div>
+            </li>
+          </>
         )}
       </ul>
     </nav>
