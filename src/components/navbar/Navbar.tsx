@@ -9,7 +9,7 @@ const Navbar = ({ username }: NavbarProps) => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="/albatross-bigger.svg" alt="logo" className="logo-icon" />
+        <img src="/svg/albatross-traced.svg" alt="logo" className="logo-icon" />
         <h3>
           <span className="logo-highlight">Alba.</span>Tross
         </h3>

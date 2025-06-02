@@ -15,7 +15,7 @@
 .navbar-user-info {
   display: flex;
   align-items: center;
-  color: white;
+  color: var(--color-white);
   cursor: default;
 }
 
@@ -62,8 +62,8 @@
 }
 
 .logo-icon {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   margin-inline: 1rem;
 }
 

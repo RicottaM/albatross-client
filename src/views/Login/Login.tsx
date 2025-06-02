@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <div className="auth-wrapper">
       <div className="auth-logo">
-        <img src="/albatross-big.svg" alt="logo" className="logo-icon-login" />
+        <img src="/svg/albatross-big.svg" alt="logo" className="logo-icon-login" />
         <h2>
           <span className="logo-highlight">Alba.</span>Tross
         </h2>
