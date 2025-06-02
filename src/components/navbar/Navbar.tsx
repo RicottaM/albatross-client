@@ -22,7 +22,7 @@ const Navbar = ({ username }: NavbarProps) => {
             </li>
             <li className="navbar-user-info">
               <div className="logout-icon-wrapper">
-                <BsDoorOpenFill size={32} onClick={logout} />
+                <BsDoorOpenFill size={28} onClick={logout} />
                 <span className="custom-tooltip">Sign out</span>
               </div>
             </li>

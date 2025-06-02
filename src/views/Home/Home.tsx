@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/context/UserContext/UserContext';
 import { useAuth } from '@/hooks/useAuth';
-import Map from '@/components/map/Map';
-import Navbar from '@/components/navbar/Navbar';
+import Map from '@/components/Map/Map';
+import Navbar from '@/components/Navbar/Navbar';
 import './Home.css';
 
 function Home() {

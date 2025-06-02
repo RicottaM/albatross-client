@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import Alert from '@/components/alert/Alert';
+import Alert from '@/components/Alert/Alert';
 import './Login.css';
 import { useLocation } from 'react-router-dom';
 

@@ -1,9 +1,11 @@
-import { MapContainer, TileLayer, Marker, ZoomControl, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, ZoomControl, useMap, Popup } from 'react-leaflet';
 import { useEffect, useMemo, useState } from 'react';
-import { calculateCenter, containerStyle, customIcon } from '@/config/leaflet';
+import { containerStyle, customIcon } from '@/config/leaflet';
+import { calculateCenter } from '@/utils/geo';
 import { usePoints } from '@/hooks/usePoints';
 import { UserPoint } from '@/models/UserPoint';
-import Alert from '@/components/alert/Alert';
+import MarkerPopup from '@/components/MarkerPopup/MarkerPopup';
+import Alert from '@/components/Alert/Alert';
 import 'leaflet/dist/leaflet.css';
 
 const SetMapCenter = ({ center }: { center: { lat: number; lng: number } }) => {
@@ -50,7 +52,11 @@ const Map = () => {
         <ZoomControl position="bottomright" />
 
         {userPoints.map((userPoint) => (
-          <Marker key={userPoint.point.id} position={[userPoint.point.latitude, userPoint.point.longitude]} icon={customIcon} />
+          <Marker key={userPoint.point.id} position={[userPoint.point.latitude, userPoint.point.longitude]} icon={customIcon}>
+            <Popup>
+              <MarkerPopup point={userPoint.point} />
+            </Popup>
+          </Marker>
         ))}
       </MapContainer>
     </>
