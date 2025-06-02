@@ -93,7 +93,6 @@ export const useAuth = () => {
       if (!res.ok) throw new Error('Sign in for full experience.');
 
       const data = await res.json();
-      console.log(`User data:`, data);
       setLogin(data.login);
     } catch (error: any) {
       setLogin(null);

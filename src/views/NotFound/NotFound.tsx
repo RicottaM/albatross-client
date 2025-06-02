@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import './NotFound.css';
-import { RiArrowGoBackFill } from 'react-icons/ri';
 
 const NotFound = () => {
   const navigate = useNavigate();

@@ -9,10 +9,10 @@ const Navbar = ({ username }: NavbarProps) => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="/albatross.svg" alt="logo" className="logo-icon" />
-        <h2>
+        <img src="/albatross-bigger.svg" alt="logo" className="logo-icon" />
+        <h3>
           <span className="logo-highlight">Alba.</span>Tross
-        </h2>
+        </h3>
       </div>
       <ul>
         {username && (
