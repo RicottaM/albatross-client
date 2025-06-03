@@ -1,0 +1,3 @@
+.leaflet-marker-icon:focus {
+  outline: none !important;
+}

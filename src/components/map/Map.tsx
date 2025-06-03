@@ -7,6 +7,7 @@ import { UserPoint } from '@/models/UserPoint';
 import MarkerPopup from '@/components/MarkerPopup/MarkerPopup';
 import Alert from '@/components/Alert/Alert';
 import 'leaflet/dist/leaflet.css';
+import './Map.css';
 
 const SetMapCenter = ({ center }: { center: { lat: number; lng: number } }) => {
   const map = useMap();
@@ -21,7 +22,7 @@ const SetMapCenter = ({ center }: { center: { lat: number; lng: number } }) => {
 const Map = () => {
   const [userPoints, setUserPoints] = useState<UserPoint[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const { getUserPoints } = usePoints();
+  const { getUserPoints, deletePoint } = usePoints();
 
   useEffect(() => {
     getUserPoints()
@@ -54,7 +55,17 @@ const Map = () => {
         {userPoints.map((userPoint) => (
           <Marker key={userPoint.point.id} position={[userPoint.point.latitude, userPoint.point.longitude]} icon={customIcon}>
             <Popup>
-              <MarkerPopup point={userPoint.point} />
+              <MarkerPopup
+                point={userPoint.point}
+                onDelete={async () => {
+                  try {
+                    await deletePoint(userPoint.point.id);
+                    setUserPoints((prev) => prev.filter((u) => u.point.id !== userPoint.point.id));
+                  } catch {
+                    setError('Failed to delete point.');
+                  }
+                }}
+              />
             </Popup>
           </Marker>
         ))}

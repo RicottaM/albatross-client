@@ -17,5 +17,17 @@ export const usePoints = () => {
     return data as UserPoint[];
   };
 
-  return { getUserPoints };
+  const deletePoint = async (id: number) => {
+    const res = await fetch(`${BACKEND_URL}/points/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || 'Failed to delete point');
+    }
+  };
+
+  return { getUserPoints, deletePoint };
 };

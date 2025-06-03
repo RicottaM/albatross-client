@@ -15,7 +15,6 @@
 .navbar-user-info {
   display: flex;
   align-items: center;
-  color: var(--color-white);
   cursor: default;
 }
 
@@ -36,6 +35,7 @@
   display: flex;
   align-items: center;
   list-style: none;
+  color: var(--color-yellow);
 }
 
 .navbar > ul > li {
@@ -56,7 +56,7 @@
 }
 
 .navbar > ul > li:hover {
-  color: var(--color-yellow);
+  color: var(--color-white);
   transition: color 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -74,10 +74,16 @@
 .logout-icon-wrapper {
   position: relative;
   display: inline-block;
+  color: var(--color-white);
 }
 
 .logout-icon-wrapper svg {
   cursor: pointer;
+}
+
+.logout-icon-wrapper:hover {
+  color: var(--color-yellow);
+  transition: color 0.2s ease-in-out;
 }
 
 .logout-icon-wrapper:hover .custom-tooltip {

@@ -28,6 +28,7 @@ body,
   font-size: 0.8rem;
   z-index: 10;
   transition: opacity 0.2s ease;
+  font-weight: bold;
   transition-delay: 0s;
 }
 
