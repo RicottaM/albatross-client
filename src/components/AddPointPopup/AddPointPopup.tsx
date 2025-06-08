@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { AddPointPopupProps } from './AddPointPopup.styles';
 import './AddPointPopup.css';
 
-const AddPointPopup = ({ onAdd, categories }: { onAdd: (name: string, categoryId: number) => void; categories: { id: number; name: string }[] }) => {
+const AddPointPopup = ({ onAdd, categories }: AddPointPopupProps) => {
   const [name, setName] = useState('');
   const [categoryId, setCategoryId] = useState<number>(categories[0]?.id || 1);
 

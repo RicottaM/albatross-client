@@ -4,13 +4,12 @@ import { containerStyle, customIcon } from '@/config/leaflet';
 import { calculateCenter } from '@/utils/geo';
 import { usePoints } from '@/hooks/usePoints';
 import { UserPoint } from '@/models/UserPoint';
-import { Category } from '@/models/Category';
+import { MapProps } from './Map.styles';
 import MarkerPopup from '@/components/MarkerPopup/MarkerPopup';
-import Alert from '@/components/Alert/Alert';
 import AddPointPopup from '../AddPointPopup/AddPointPopup';
+import Alert from '@/components/Alert/Alert';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
-import { useCategories } from '@/hooks/useCatagories';
 
 const MapClickHandler = ({ onRightClick }: { onRightClick: (latlng: { lat: number; lng: number }) => void }) => {
   const map = useMap();
@@ -54,24 +53,17 @@ const PopupCloseHandler = ({ onClose }: { onClose: () => void }) => {
   return null;
 };
 
-const Map = () => {
+const Map = ({ selectedCategory, categories }: MapProps) => {
   const [userPoints, setUserPoints] = useState<UserPoint[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [newMarker, setNewMarker] = useState<{ lat: number; lng: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { getUserPoints, deletePoint, createPoint } = usePoints();
-  const { getCategories } = useCategories();
-
   const newMarkerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
     getUserPoints()
       .then(setUserPoints)
       .catch(() => setError('Failed to load points.'));
-
-    getCategories()
-      .then(setCategories)
-      .catch(() => setError('Failed to load categories'));
   }, []);
 
   useEffect(() => {
@@ -106,23 +98,25 @@ const Map = () => {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="bottomright" />
 
-        {userPoints.map((userPoint) => (
-          <Marker key={userPoint.point.id} position={[userPoint.point.latitude, userPoint.point.longitude]} icon={customIcon}>
-            <Popup>
-              <MarkerPopup
-                point={userPoint.point}
-                onDelete={async () => {
-                  try {
-                    await deletePoint(userPoint.point.id);
-                    setUserPoints((prev) => prev.filter((u) => u.point.id !== userPoint.point.id));
-                  } catch {
-                    setError('Failed to delete point.');
-                  }
-                }}
-              />
-            </Popup>
-          </Marker>
-        ))}
+        {userPoints
+          .filter((u) => selectedCategory === '*' || u.point.categoryId === selectedCategory)
+          .map((userPoint) => (
+            <Marker key={userPoint.point.id} position={[userPoint.point.latitude, userPoint.point.longitude]} icon={customIcon}>
+              <Popup>
+                <MarkerPopup
+                  point={userPoint.point}
+                  onDelete={async () => {
+                    try {
+                      await deletePoint(userPoint.point.id);
+                      setUserPoints((prev) => prev.filter((u) => u.point.id !== userPoint.point.id));
+                    } catch {
+                      setError('Failed to delete point.');
+                    }
+                  }}
+                />
+              </Popup>
+            </Marker>
+          ))}
 
         {newMarker && (
           <Marker position={[newMarker.lat, newMarker.lng]} icon={customIcon} ref={newMarkerRef}>
