@@ -1,0 +1,71 @@
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background-color: var(--color-black);
+  padding: 1.25rem;
+  border-radius: 12px;
+  min-width: 180px;
+}
+
+.popup h3 {
+  margin: 0;
+  padding-bottom: 0.3rem;
+  color: var(--color-yellow);
+  font-size: 16px;
+  text-align: center;
+}
+
+.popup-input {
+  padding: 0.6rem;
+  border: solid 1px var(--color-dark-gray);
+  border-radius: 8px;
+  font-size: 13px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.popup-select {
+  padding: 0.6rem;
+  border: solid 1px var(--color-dark-gray);
+  border-radius: 8px;
+  font-size: 13px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.popup-input:focus,
+.popup-select:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+  transform: scale(1.02);
+}
+
+.popup-input::placeholder {
+  color: var(--color-gray);
+  transition: color 0.2s ease;
+}
+
+.popup-input:focus::placeholder {
+  color: var(--color-yellow);
+}
+
+.popup-confirm {
+  background-color: var(--color-yellow);
+  color: var(--color-black);
+  border: solid 1px var(--color-yellow);
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.popup-confirm:hover {
+  background-color: #e6b800;
+}

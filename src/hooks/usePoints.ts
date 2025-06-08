@@ -29,5 +29,23 @@ export const usePoints = () => {
     }
   };
 
-  return { getUserPoints, deletePoint };
+  const createPoint = async (name: string, lat: number, lng: number, categoryId: number) => {
+    const res = await fetch(`${BACKEND_URL}/points`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ name, latitude: Number(lat.toFixed(4)), longitude: Number(lng.toFixed(4)), categoryId }),
+    });
+
+    if (!res.ok) {
+      const text = await res.json();
+      throw new Error(text.messages.join('\n') || 'Failed to create point');
+    }
+
+    const data = await res.json();
+
+    return data;
+  };
+
+  return { getUserPoints, deletePoint, createPoint };
 };

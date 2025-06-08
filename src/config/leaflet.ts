@@ -10,4 +10,5 @@ export const customIcon = new L.Icon({
   iconSize: [32, 32],
   iconAnchor: [16, 40],
   popupAnchor: [0, -40],
+  className: 'marker-animate',
 });
