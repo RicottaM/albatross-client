@@ -57,8 +57,9 @@ const Map = ({ selectedCategory, categories }: MapProps) => {
   const [userPoints, setUserPoints] = useState<UserPoint[]>([]);
   const [newMarker, setNewMarker] = useState<{ lat: number; lng: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { getUserPoints, deletePoint, createPoint } = usePoints();
+  const { getUserPoints, deletePoint, createPoint, updatePoint } = usePoints();
   const newMarkerRef = useRef<L.Marker | null>(null);
+  const markerRefs = useRef<Record<number, L.Marker | null>>({});
 
   useEffect(() => {
     getUserPoints()
@@ -101,10 +102,28 @@ const Map = ({ selectedCategory, categories }: MapProps) => {
         {userPoints
           .filter((u) => selectedCategory === '*' || u.point.categoryId === selectedCategory)
           .map((userPoint) => (
-            <Marker key={userPoint.point.id} position={[userPoint.point.latitude, userPoint.point.longitude]} icon={customIcon}>
+            <Marker
+              key={userPoint.point.id}
+              position={[userPoint.point.latitude, userPoint.point.longitude]}
+              icon={customIcon}
+              ref={(ref) => {
+                markerRefs.current[userPoint.point.id] = ref;
+              }}
+            >
               <Popup>
                 <MarkerPopup
                   point={userPoint.point}
+                  categories={categories}
+                  markerRef={markerRefs.current[userPoint.point.id]}
+                  onUpdate={async (id, name, lat, lng, categoryId) => {
+                    try {
+                      await updatePoint(id, { name, latitude: lat, longitude: lng, categoryId });
+                      const updatedPoints = await getUserPoints();
+                      setUserPoints(updatedPoints);
+                    } catch (err: any) {
+                      setError(err?.message || 'Failed to update point.');
+                    }
+                  }}
                   onDelete={async () => {
                     try {
                       await deletePoint(userPoint.point.id);

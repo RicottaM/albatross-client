@@ -1,10 +1,9 @@
 .popup {
   width: 120px;
-  padding: 15px;
-  padding-bottom: 10px;
   border-radius: 8px;
   background-color: var(--color-black);
   font-family: sans-serif;
+  display: flex;
 }
 
 .popup-header {
@@ -12,14 +11,21 @@
   justify-content: space-between;
   font-weight: bold;
   color: var(--color-yellow);
-  margin-bottom: 4px;
   font-size: 14px;
 }
 
 .popup-name {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.2;
   color: var(--color-white);
+}
+
+.popup-input {
+  width: 160px;
+}
+
+.popup-select {
+  width: 180px;
 }
 
 .leaflet-popup-content-wrapper {
@@ -36,13 +42,18 @@
 .popup-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 4px;
+}
+
+.popup-icon-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .popup-icon {
   cursor: pointer;
-  font-size: 24px;
+  font-size: 28px;
+  margin-top: 10px;
   color: var(--color-yellow);
   transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -57,9 +68,15 @@
   padding: 0 !important;
 }
 
-.popup-icon-wrapper {
-  position: relative;
-  display: inline-block;
+.popup-edit-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.popup-edit-wrapper button {
+  width: 50%;
 }
 
 .popup-icon:hover {

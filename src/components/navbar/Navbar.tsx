@@ -1,12 +1,7 @@
+import { FiLogOut, FiSettings } from 'react-icons/fi';
 import { useAuth } from '@/hooks/useAuth';
 import { NavbarProps } from './Navbar.types';
-import { VscSignOut } from 'react-icons/vsc';
 import './Navbar.css';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { HiLogout } from 'react-icons/hi';
-import { MdLogout } from 'react-icons/md';
-import { PiSignOutBold } from 'react-icons/pi';
-import { FaCircleUser } from 'react-icons/fa6';
 
 const Navbar = ({ username, categories, selectedCategory, onCategoryChange }: NavbarProps) => {
   const { logout } = useAuth();
@@ -42,7 +37,11 @@ const Navbar = ({ username, categories, selectedCategory, onCategoryChange }: Na
             </li>
             <li className="navbar-user-info">
               <div className="logout-icon-wrapper">
-                <PiSignOutBold size={26} onClick={logout} />
+                <FiSettings size={20} onClick={() => {}} />
+                <span className="custom-tooltip">User panel</span>
+              </div>
+              <div className="logout-icon-wrapper">
+                <FiLogOut size={20} onClick={logout} />
                 <span className="custom-tooltip">Sign out</span>
               </div>
             </li>

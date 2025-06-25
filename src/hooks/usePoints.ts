@@ -1,4 +1,5 @@
 import { UserPoint } from '@/models/UserPoint';
+import { PointUpdate } from '@/types/PointUpdate';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -47,5 +48,22 @@ export const usePoints = () => {
     return data;
   };
 
-  return { getUserPoints, deletePoint, createPoint };
+  const updatePoint = async (id: number, data: PointUpdate) => {
+    console.log('data:', data);
+    const res = await fetch(`${BACKEND_URL}/points/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const text = await res.json();
+      throw new Error(text.messages?.join('\n') || 'Failed to update point');
+    }
+
+    return await res.json();
+  };
+
+  return { getUserPoints, deletePoint, createPoint, updatePoint };
 };

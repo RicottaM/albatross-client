@@ -9,7 +9,7 @@ body,
 }
 
 *::selection {
-  background-color: var(--color-white);
+  background-color: var(--color-yellow);
   color: var(--color-black);
 }
 
