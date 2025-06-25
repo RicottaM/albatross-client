@@ -1,0 +1,91 @@
+.popup {
+  width: 120px;
+  border-radius: 8px;
+  background-color: var(--color-black);
+  font-family: sans-serif;
+  display: flex;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: var(--color-yellow);
+  font-size: 14px;
+}
+
+.popup-name {
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--color-white);
+}
+
+.popup-input {
+  width: 160px;
+}
+
+.popup-select {
+  width: 180px;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: var(--color-black) !important;
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 6px var(--color-dark-gray);
+}
+
+.leaflet-popup-tip {
+  background-color: var(--color-black) !important;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.popup-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.popup-icon {
+  cursor: pointer;
+  font-size: 28px;
+  margin-top: 10px;
+  color: var(--color-yellow);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.leaflet-popup-close-button {
+  display: none !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+  padding: 0 !important;
+}
+
+.popup-edit-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.popup-edit-wrapper button {
+  width: 50%;
+}
+
+.popup-icon:hover {
+  transform: scale(1.15);
+  color: var(--color-white);
+}
+
+.popup-icon-wrapper:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.6s;
+}
